@@ -134,28 +134,44 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
              */
             "*" -> {
                 if (prevResult != 0f)
-                    prevResult * firstNum * secondNum
+                    if(secondNum != 0f)
+                        prevResult * firstNum * secondNum
+                    else{
+                        prevResult * firstNum
+                    }
                 else{
                     firstNum * secondNum
                 }
             }
             "/" -> {
                 if (prevResult != 0f)
-                    prevResult / firstNum / secondNum
+                    if(secondNum != 0f)
+                        prevResult / firstNum / secondNum
+                    else {
+                        prevResult / firstNum
+                    }
                 else{
                     firstNum / secondNum
                 }
             }
             "^" -> {
                 if (prevResult != 0f)
-                    prevResult.pow(firstNum.pow(secondNum))
+                    if(secondNum != 0f)
+                        prevResult.pow(firstNum.pow(secondNum))
+                    else {
+                        prevResult.pow(firstNum)
+                    }
                 else{
                     firstNum.pow(secondNum)
                 }
             }
             "-/" -> {
                 if (prevResult != 0f)
-                    firstNum.pow(1/secondNum)
+                    if(secondNum != 0f)
+                        prevResult.pow(1/firstNum.pow(1/secondNum))
+                    else {
+                        prevResult.pow(1/firstNum)
+                    }
                 else{
                     firstNum.pow(1/secondNum)
                 }
