@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">My2</string>
+    <string name="first_number">First number</string>
+    <string name="second_number">Second number</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear_msg">Cleared</string>
+    <string name="number_format">Number format:</string>
+    <string name="integer">integer</string>
+    <string name="floatSet">float</string>
+    <string name="apply">APPLY</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="numberFormatKey">format</string>
+</resources>
