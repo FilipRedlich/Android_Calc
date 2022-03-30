@@ -6,9 +6,6 @@
         android:id="@+id/settingsItem"
         android:title="Settings" />
     <item
-        android:id="@+id/historyItem"
-        android:title="History" />
-    <item
         android:id="@+id/shareItem"
         android:title="Share" />
 </menu>

@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlin.math.pow
-import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener {
     private var currentOperation: String = " "
@@ -27,8 +26,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                 val op1Button = findViewById<Button>(R.id.firstOperationButton)
                 val op2Button = findViewById<Button>(R.id.secondOperationButton)
                 val fab = findViewById<FloatingActionButton>(R.id.clearButton)
+                val clrHist = findViewById<Button>(R.id.clrHistory)
                 fab.setOnClickListener {
                     clearCalculator()
+                }
+                clrHist.setOnClickListener {
+                    clearHistory()
                 }
                 // postion -> p2
                 when (p2) {
@@ -61,6 +64,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         calcButton.setOnClickListener(this)
         calcButton.setOnLongClickListener(this)
 
+    }
+
+    private fun clearHistory() {
+        findViewById<TextView>(R.id.calc1).text = ""
+        findViewById<TextView>(R.id.calc2).text = ""
+        findViewById<TextView>(R.id.calc3).text = ""
+        findViewById<TextView>(R.id.calc4).text = ""
+        findViewById<TextView>(R.id.calc5).text = ""
+        findViewById<TextView>(R.id.calc6).text = ""
+        findViewById<TextView>(R.id.calc7).text = ""
+        findViewById<TextView>(R.id.calc8).text = ""
+        findViewById<TextView>(R.id.calc9).text = ""
+        findViewById<TextView>(R.id.calc10).text = ""
+        Snackbar.make(
+            findViewById(R.id.clearButton),
+            "Cleared History",
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 
     private fun clearCalculator() {
@@ -107,12 +128,104 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         updateResult(resultStr)
         return true
     }
-
     private fun updateResult(resultStr: String) {
         val resultTextView = findViewById<TextView>(R.id.resultTextView)
-        //val calc = findViewById<TextView>(R.id.calc1)
         resultTextView.text = resultStr
-        //calc.text = resultStr
+        val calc1 = findViewById<TextView>(R.id.calc1)
+        val calc2 = findViewById<TextView>(R.id.calc2)
+        val calc3 = findViewById<TextView>(R.id.calc3)
+        val calc4 = findViewById<TextView>(R.id.calc4)
+        val calc5 = findViewById<TextView>(R.id.calc5)
+        val calc6 = findViewById<TextView>(R.id.calc6)
+        val calc7 = findViewById<TextView>(R.id.calc7)
+        val calc8 = findViewById<TextView>(R.id.calc8)
+        val calc9 = findViewById<TextView>(R.id.calc9)
+        val calc10 = findViewById<TextView>(R.id.calc10)
+        if(resultStr != getString(R.string.calculate))  {
+            if(calc1.text=="")   {
+                calc1.text = resultStr
+            }else   {
+                if(calc2.text==""){
+                    calc2.text=calc1.text
+                    calc1.text=resultStr
+                }else{
+                    if(calc3.text==""){
+                        calc3.text=calc2.text
+                        calc2.text=calc1.text
+                        calc1.text=resultStr
+                    }else{
+                        if(calc4.text==""){
+                            calc4.text=calc3.text
+                            calc3.text=calc2.text
+                            calc2.text=calc1.text
+                            calc1.text=resultStr
+                        }else   {
+                            if(calc5.text==""){
+                                calc5.text=calc4.text
+                                calc4.text=calc3.text
+                                calc3.text=calc2.text
+                                calc2.text=calc1.text
+                                calc1.text=resultStr
+                            }else   {
+                                if(calc6.text==""){
+                                    calc6.text=calc5.text
+                                    calc5.text=calc4.text
+                                    calc4.text=calc3.text
+                                    calc3.text=calc2.text
+                                    calc2.text=calc1.text
+                                    calc1.text=resultStr
+                                }else  {
+                                    if(calc7.text==""){
+                                        calc7.text=calc6.text
+                                        calc6.text=calc5.text
+                                        calc5.text=calc4.text
+                                        calc4.text=calc3.text
+                                        calc3.text=calc2.text
+                                        calc2.text=calc1.text
+                                        calc1.text=resultStr
+                                    }else{
+                                        if(calc8.text==""){
+                                            calc8.text=calc7.text
+                                            calc7.text=calc6.text
+                                            calc6.text=calc5.text
+                                            calc5.text=calc4.text
+                                            calc4.text=calc3.text
+                                            calc3.text=calc2.text
+                                            calc2.text=calc1.text
+                                            calc1.text=resultStr
+                                        }else   {
+                                            if(calc9.text==""){
+                                                calc9.text=calc8.text
+                                                calc8.text=calc7.text
+                                                calc7.text=calc6.text
+                                                calc6.text=calc5.text
+                                                calc5.text=calc4.text
+                                                calc4.text=calc3.text
+                                                calc3.text=calc2.text
+                                                calc2.text=calc1.text
+                                                calc1.text=resultStr
+                                            }else{
+                                                calc10.text=calc9.text
+                                                calc9.text=calc8.text
+                                                calc8.text=calc7.text
+                                                calc7.text=calc6.text
+                                                calc6.text=calc5.text
+                                                calc5.text=calc4.text
+                                                calc4.text=calc3.text
+                                                calc3.text=calc2.text
+                                                calc2.text=calc1.text
+                                                calc1.text=resultStr
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     private fun getResult(firstNum: Float, secondNum: Float, updateResult: Boolean = false): String {
@@ -130,10 +243,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                     firstNum - secondNum
                 }
             }
-            /*
-            "*" -> prevResult * firstNum * secondNum
-            "/" -> prevResult / firstNum / secondNum
-             */
             "*" -> {
                 if (prevResult != 0f)
                     if(secondNum != 0f)
@@ -180,7 +289,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             }
             else -> 0f
         }
-        return "${getString(R.string.calculate)} $result"
+        //return "${getString(R.string.calculate)} $result"
+        val zero = 0.0
+        return if (updateResult)  {
+            if(currentOperation == "/" && firstNum == zero.toFloat() || currentOperation == "/" && secondNum == zero.toFloat())   {
+                "Can't /0"
+            }else {
+                "$prevResult $currentOperation $firstNum $currentOperation $secondNum = $result"
+            }
+        }else   {
+            if(currentOperation == "/" && secondNum == zero.toFloat())  {
+                "Can't /0"
+            }else   {
+                "$firstNum $currentOperation $secondNum = $result"
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -192,7 +315,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.settingsItem -> startSettingsActivity()
-            R.id.historyItem -> startHistoryActivity()
             R.id.shareItem -> shareResult()
             else -> return super.onOptionsItemSelected(item)
         }
@@ -214,11 +336,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
     private fun startSettingsActivity() {
         val intent: Intent = Intent(this,SettingsActivity::class.java)
-        intent.putExtra(getString(R.string.numberFormatKey),format)
-        launchSettingsActivity.launch(intent)
-    }
-    private fun startHistoryActivity() {
-        val intent: Intent = Intent(this,HistoryActivity::class.java)
         intent.putExtra(getString(R.string.numberFormatKey),format)
         launchSettingsActivity.launch(intent)
     }
