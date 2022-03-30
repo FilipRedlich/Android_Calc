@@ -110,7 +110,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     private fun updateResult(resultStr: String) {
         val resultTextView = findViewById<TextView>(R.id.resultTextView)
+        //val calc = findViewById<TextView>(R.id.calc1)
         resultTextView.text = resultStr
+        //calc.text = resultStr
     }
 
     private fun getResult(firstNum: Float, secondNum: Float, updateResult: Boolean = false): String {
@@ -190,11 +192,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.settingsItem -> startSettingsActivity()
+            R.id.historyItem -> startHistoryActivity()
             R.id.shareItem -> shareResult()
             else -> return super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
     }
+
     private var format: String = "Float"
     private val launchSettingsActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result -> if(result.resultCode == RESULT_OK) {
@@ -210,6 +214,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
     private fun startSettingsActivity() {
         val intent: Intent = Intent(this,SettingsActivity::class.java)
+        intent.putExtra(getString(R.string.numberFormatKey),format)
+        launchSettingsActivity.launch(intent)
+    }
+    private fun startHistoryActivity() {
+        val intent: Intent = Intent(this,HistoryActivity::class.java)
         intent.putExtra(getString(R.string.numberFormatKey),format)
         launchSettingsActivity.launch(intent)
     }
